@@ -6,7 +6,10 @@
 </head>
 <body>
 	<form id="myForm">
-		<input type="text" id="name">
+		<select id="rooms">
+			<option value="room-1">room-1</option>
+			<option value="room-2">room-2</option>
+		</select>
 		<input type="text" id="msg">
 		<input type="submit" value="send">
 	</form>
@@ -20,7 +23,7 @@
 			e.preventDefault()
 			socket.json.emit("emit_from_client", {
 				msg : $('#msg').val(),
-				name : $('#name').val()
+				room : $('#rooms').val()
 			})
 			$('#msg').val('').focus();
 		})

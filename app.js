@@ -18,9 +18,8 @@ function handler(req, res) {
 io.sockets.on("connection", function(socket){
 	socket.on("emit_from_client", function(data){
 		console.log(data)
-		//socket.emit("emit_from_server", "hello from server: " + data)
-		//socket.broadcast.emit("emit_from_server", "hello from server: " + data)
-		socket.client_name = data.name
-		io.sockets.emit("emit_from_server", "[" + socket.client_name + "]:" + data.msg)
+		socket.join(data.room)
+		socket.emit("emit_from_server", "you are in " + data.room)
+		socket.broadcast.to(data.room).emit("emit_from_server", data.msg)
 	})
 })
